@@ -1,17 +1,38 @@
 import streamlit as st
-import pickle
-import numpy as np
+import joblib
 import pandas as pd
-
-# --- Load Model and Scaler ---
-with open('model.pkl', 'rb') as f:
-    model = pickle.load(f)
-
-with open('scaler.pkl', 'rb') as f:
-    scaler = pickle.load(f)
+import numpy as np
+import requests
+import io
+import os
 
 # --- Page Configuration ---
 st.set_page_config(page_title="Customer Exit Predictor", layout="centered")
+
+# --- Load Model and Scaler ---
+@st.cache_resource
+def load_model_and_scaler():
+    # Load model from Google Drive
+    file_id = '16e5H5z11LyVmURm4io_PD7tGAXmww1qO'
+    url = f"https://drive.google.com/uc?id={file_id}"
+    response = requests.get(url)
+    if response.status_code != 200:
+        st.error('❌ Failed to download the model from Drive!')
+        return None, None
+    model = joblib.load(io.BytesIO(response.content))
+
+    # Load scaler from local file
+    if not os.path.exists('scaler.pkl'):
+        st.error('❌ scaler.pkl not found locally!')
+        return None, None
+    scaler = joblib.load('scaler.pkl')
+
+    return model, scaler
+
+model, scaler = load_model_and_scaler()
+
+if not model or not scaler:
+    st.stop()  # Stop if model or scaler not loaded
 
 # --- Custom CSS ---
 st.markdown("""
@@ -50,7 +71,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Header Image ---
-st.image("header1.png", use_container_width=True)
+if os.path.exists("header1.png"):
+    st.image("header1.png", use_container_width=True)
 
 # --- App Title ---
 st.markdown('<div class="title">💼 Customer Exit Prediction</div>', unsafe_allow_html=True)
@@ -92,22 +114,14 @@ if submitted:
     features = [credit_score, age, tenure, balance, products, has_card, is_active,
                 salary, geo_germany, geo_spain, gender_male]
 
-    # 1. Create DataFrame from input
     input_df = pd.DataFrame([features], columns=feature_names)
 
-    feature_order = [
-    'CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts',
-    'HasCrCard', 'IsActiveMember', 'EstimatedSalary',
-    'Geography_Germany', 'Geography_Spain', 'Gender_Male'
-]
-
     scale_vars = ["CreditScore", "EstimatedSalary", "Tenure", "Balance", "Age", "NumOfProducts"]
-    # Apply StandardScaler to the required columns
+
+    # Scale required features
     input_data_scaled = input_df.copy()
     input_data_scaled[scale_vars] = scaler.transform(input_data_scaled[scale_vars])
-    # Debug: show final input
-    #st.write("🧪 Final input to model:", input_data_scaled)
-    
+
     # Prediction
     prediction = model.predict(input_data_scaled)[0]
     prob = model.predict_proba(input_data_scaled)[0][1]
@@ -117,4 +131,3 @@ if submitted:
         st.markdown(f"<div class='result' style='color:red;'>⚠️ The customer is <strong>likely to exit</strong>. (Probability: {prob:.2%})</div>", unsafe_allow_html=True)
     else:
         st.markdown(f"<div class='result' style='color:green;'>✅ The customer is <strong>likely to stay</strong>. (Probability: {prob:.2%})</div>", unsafe_allow_html=True)
-    
