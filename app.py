@@ -13,7 +13,8 @@ st.set_page_config(page_title="Customer Exit Predictor", layout="centered")
 @st.cache_resource
 def load_model_and_scaler():
     # Load model from Google Drive
-    file_id = '16e5H5z11LyVmURm4io_PD7tGAXmww1qO'
+    #file_id = '16e5H5z11LyVmURm4io_PD7tGAXmww1qO'
+    file_id = '10pNZ4BVUEG7XJ2ciGPftZRD5W_hqRPw9'
     url = f"https://drive.google.com/uc?id={file_id}"
     response = requests.get(url)
     if response.status_code != 200:
