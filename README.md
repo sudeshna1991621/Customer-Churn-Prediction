@@ -1,5 +1,16 @@
 # 🧮 Customer Churn Prediction Project
 
+## 📊 Dataset
+The project uses the Bank Customer Churn Prediction dataset, which contains account information for 10,000 customers at a European bank. The dataset includes details such as:
+- Credit Score: Customer's credit score
+- Balance: Customer’s account balance
+- Number of Products: Number of products the customer holds
+- Exited: Whether the customer has churned (1) or not (0)
+
+### Dataset Access:
+You can download the dataset from Kaggle:
+👉 https://www.kaggle.com/datasets/shubhammeshram579/bank-customer-churn-prediction
+
 ## 🔍 Overview
 This project aims to predict customer churn using machine learning and showcase insights via a Power BI dashboard and a Streamlit web app. The project involves:
 - Data preprocessing and transformation
