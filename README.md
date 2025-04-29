@@ -53,12 +53,32 @@ This project aims to predict customer churn using machine learning and showcase 
 - Final **calibrated model** saved as `model.pkl`
 
 ## 📁 Repository Contents
-- `churn_model.pkl` – Calibrated Random Forest model
-- `modified_dataset.csv` – Dataset with predicted churn probability and classification
-- `feature_importance.csv` – Feature importance from Random Forest
-- `notebooks/` – Jupyter notebooks for model training, evaluation, and calibration
 
----
+- `model.pkl` – ✅ Calibrated Random Forest model  
+  📎 [Download](https://drive.google.com/file/d/16e5H5z11LyVmURm4io_PD7tGAXmww1qO/view?usp=drive_link)
+
+- `RF.pkl` – ✅ Best Random Forest model (after hyperparameter tuning)  
+  📎 [Download](https://drive.google.com/file/d/10pNZ4BVUEG7XJ2ciGPftZRD5W_hqRPw9/view?usp=drive_link)
+
+- `scaler.pkl` – StandardScaler used for feature scaling
+
+- `Bank_churn_modified.csv` – Modified dataset with two additional columns:
+  - `Exit_Probability`: Predicted probability of customer churn
+  - `Predicted`: Final predicted status (0 = stay, 1 = churn)
+
+- `feature_importance.csv` – Feature importance scores from the Random Forest model
+
+- `Bank_churn.ipynb` – Jupyter Notebook for:
+  - Preprocessing
+  - Model training and tuning
+  - Model calibration and evaluation
+
+- `app.py` – Source code for the Streamlit application
+
+- `Bak_customer_churn.pbix` – Power BI dashboard file (for advanced data visualization)
+
+- `requirements.txt` – List of required Python packages and versions
+
 
 ## 🚀 Live Applications
 
