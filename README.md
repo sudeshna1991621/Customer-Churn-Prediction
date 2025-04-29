@@ -27,14 +27,14 @@ This project aims to predict customer churn using machine learning and showcase 
 - Applied **SMOTE** to handle class imbalance
 
 ### 4. Model Evaluation (After SMOTE)
-| Model              | Accuracy | Precision | Recall  | F1-Score |
-|-------------------|----------|-----------|---------|----------|
-| Random Forest      | 0.8430   | 0.5940    | 0.6143  | 0.6040   |
-| XGBoost            | 0.8479   | 0.6222    | 0.5583  | 0.5885   |
-| SVM                | 0.7933   | 0.4797    | 0.7170  | 0.5748   |
-| ANN (MLP)          | 0.7976   | 0.4858    | 0.6656  | 0.5617   |
-| KNN                | 0.7555   | 0.4238    | 0.7092  | 0.5305   |
-| Logistic Regression| 0.7021   | 0.3586    | 0.6703  | 0.4672   |
+| Model               | Accuracy |
+|--------------------|----------|
+| XGBoost            | 0.8479   |
+| Random Forest      | 0.8430   |
+| ANN (MLP)          | 0.7976   |
+| SVM                | 0.7933   |
+| KNN                | 0.7555   |
+| Logistic Regression| 0.7021   |
 
 ## 🌲 Final Model Selection
 
