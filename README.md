@@ -36,12 +36,21 @@ This project aims to predict customer churn using machine learning and showcase 
 | KNN                | 0.7555   | 0.4238    | 0.7092  | 0.5305   |
 | Logistic Regression| 0.7021   | 0.3586    | 0.6703  | 0.4672   |
 
-### 5. Final Model
-- Hyperparameter tuning using **GridSearchCV** for Random Forest
-- Calibrated classifier for improved probability prediction
-- Saved as `.pkl` file
+## 🌲 Final Model Selection
 
----
+### ✅ Random Forest Classifier
+- **Best performer** after evaluation
+- **Hyperparameter tuning** using `GridSearchCV`
+- **Best Parameters**: 
+  - `n_estimators`: 300
+  - `min_samples_split`: 2
+  - `min_samples_leaf`: 1
+  - `max_depth`: None
+- **Best F1 Score**: 0.8969
+- **Test Accuracy**: 0.8467
+- **Model calibration** applied to improve probability scores
+- Final **best Random Forest model** saved as `RF.pkl`
+- Final **calibrated model** saved as `model.pkl`
 
 ## 📁 Repository Contents
 - `churn_model.pkl` – Calibrated Random Forest model
